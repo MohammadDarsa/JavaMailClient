@@ -17,7 +17,7 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) {
         Parent parent = null;
         try {
-             parent = FXMLLoader.load(getClass().getResource("view/LoginWindow.fxml"));
+             parent = FXMLLoader.load(getClass().getResource("view/MainWindow.fxml"));
         } catch (IOException e) {
             e.getMessage();
         }
