@@ -14,6 +14,7 @@ public class Launcher extends Application {
     public void start(Stage primaryStage) {
         ViewFactory viewFactory = new ViewFactory(new EmailManager());
         viewFactory.showLoginWindow();
+        viewFactory.updateStyle();
     }
 
 }

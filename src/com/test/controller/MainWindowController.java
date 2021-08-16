@@ -22,6 +22,10 @@ public class MainWindowController extends BaseController{
     @FXML
     private TableView<?> emailsTableView;
 
+    @FXML
+    void addAccountAction() {
+        viewFactory.showLoginWindow();
+    }
 
 
     @FXML
