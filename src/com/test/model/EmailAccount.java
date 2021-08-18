@@ -35,8 +35,8 @@ public class EmailAccount {
     }
 
     public EmailAccount(String address, String password) {
-        address = address;
-        password = password;
+        this.address = address;
+        this.password = password;
         properties = new Properties();
         properties.put("incomingHost", "imap.gmail.com");
         properties.put("mail.store.protocol", "imaps");

@@ -35,7 +35,7 @@ public class LoginWindowController extends BaseController {
 
             switch (emailLoginResult) {
                 case SUCCESS:
-                    System.out.printf("login successful! " + emailAccount.getAddress());
+                    System.out.println("login successful! " + emailAccount.getAddress());
                     return;
             }
         }
