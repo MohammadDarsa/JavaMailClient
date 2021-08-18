@@ -16,6 +16,9 @@ import java.util.ArrayList;
 public class ViewFactory {
     private EmailManager emailManager;
     private ArrayList<Stage> activeStages;
+    private boolean mainViewInitialized = false;
+
+    public boolean isMainViewInitialized() {return mainViewInitialized;}
 
     public ViewFactory(EmailManager emailManager) {
         this.emailManager = emailManager;
@@ -23,7 +26,7 @@ public class ViewFactory {
     }
 
     //View options handling:
-    private ColorTheme colorTheme = ColorTheme.DARK;
+    private ColorTheme colorTheme = ColorTheme.DEFAULT;
     private FontSize fontSize = FontSize.SMALL;
 
     public void showLoginWindow() {
@@ -33,9 +36,11 @@ public class ViewFactory {
     }
 
     public void showMainWindow() {
+        if(mainViewInitialized) return;
         BaseController controller = new MainWindowController(emailManager, this, "MainWindow.fxml");
         initializeStage(controller);
         this.updateStyle();
+        mainViewInitialized = true;
     }
 
     public void showOptionsWindow() {

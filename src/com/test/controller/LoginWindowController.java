@@ -5,12 +5,16 @@ import com.test.controller.services.LoginService;
 import com.test.model.EmailAccount;
 import com.test.view.ViewFactory;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class LoginWindowController extends BaseController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class LoginWindowController extends BaseController implements Initializable {
 
     public LoginWindowController(EmailManager emailManager, ViewFactory viewFactory, String fxmlFileName) {
         super(emailManager, viewFactory, fxmlFileName);
@@ -31,17 +35,31 @@ public class LoginWindowController extends BaseController {
         if(fieldsAreValid()) {
             EmailAccount emailAccount = new EmailAccount(emailAddressField.getText(), passwordField.getText());
             LoginService loginService = new LoginService(emailAccount, emailManager);
-            EmailLoginResult emailLoginResult = loginService.login();
-
-            switch (emailLoginResult) {
-                case SUCCESS:
-                    System.out.println("login successful! " + emailAccount.getAddress());
-                    return;
-            }
+            loginService.start();
+            loginService.setOnSucceeded(event -> {
+                EmailLoginResult emailLoginResult = loginService.getValue();
+                switch (emailLoginResult) {
+                    case SUCCESS:
+                        System.out.println("login successful! " + emailAccount.getAddress());
+                        viewFactory.showMainWindow();
+                        Stage stage = (Stage) errorLabel.getScene().getWindow();
+                        viewFactory.closeStage(stage);
+                        return;
+                    case FAILED_BY_CREDENTIALS:
+                        errorLabel.setText("invalid Credentials");
+                        return;
+                    case FAILED_BY_NETWORK:
+                        errorLabel.setText("Network Error!");
+                        return;
+                    case FAILED_BY_UNEXPECTED_ERROR:
+                        errorLabel.setText("Unexpected Error!");
+                        return;
+                    default:
+                        return;
+                }
+            });
         }
-        viewFactory.showMainWindow();
-        Stage stage = (Stage)errorLabel.getScene().getWindow();
-        viewFactory.closeStage(stage);
+
     }
 
     private boolean fieldsAreValid() {
@@ -56,5 +74,9 @@ public class LoginWindowController extends BaseController {
         }
 
         return true;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }
