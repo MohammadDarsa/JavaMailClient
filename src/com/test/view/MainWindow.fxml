@@ -36,11 +36,11 @@
       <TreeView fx:id="emailsTreeView" layoutY="28.0" prefHeight="657.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="28.0" />
       <TableView fx:id="emailsTableView" layoutX="240.0" layoutY="28.0" prefHeight="238.0" prefWidth="782.0" AnchorPane.leftAnchor="240.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
         <columns>
-          <TableColumn prefWidth="132.0" text="Sender" />
-          <TableColumn prefWidth="181.0" text="Subject" />
-            <TableColumn prefWidth="176.0" text="Recipient" />
-            <TableColumn prefWidth="115.0" text="Size" />
-            <TableColumn prefWidth="177.0" text="Date" />
+          <TableColumn fx:id="senderCol" prefWidth="132.0" text="Sender" />
+          <TableColumn fx:id="subjectCol" prefWidth="181.0" text="Subject" />
+            <TableColumn fx:id="recipientCol" prefWidth="176.0" text="Recipient" />
+            <TableColumn fx:id="sizeCol" prefWidth="115.0" text="Size" />
+            <TableColumn fx:id="dateCol" prefWidth="177.0" text="Date" />
         </columns>
       </TableView>
    </children>
