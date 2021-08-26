@@ -3,7 +3,11 @@ package com.test.controller;
 import com.test.EmailManager;
 import com.test.view.ViewFactory;
 
-public abstract class BaseController {
+interface Hello {
+
+}
+
+public abstract class BaseController implements Hello {
     protected EmailManager emailManager;
     protected ViewFactory viewFactory;
     private String fxmlFileName;
